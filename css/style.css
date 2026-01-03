@@ -1,0 +1,1142 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  display: grid;
+  text-align: center;
+  place-items: center;
+  background: #dde1e7;
+}
+
+/* ФИКС: Скрытие спиннеров для числовых полей */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield; /* Firefox */
+}
+/* ------------------------------------------- */
+/* СТИЛИ ДЛЯ ЛОГИНА/РЕГИСТРАЦИИ */
+/* ------------------------------------------- */
+.content {
+  width: 330px;
+  background: #dde1e7;
+  border-radius: 10px;
+  padding: 40px 30px;
+  box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px rgba(94, 104, 121, 0.288);
+}
+.content .text {
+  font-size: 33px;
+  font-weight: 600;
+  margin-bottom: 35px;
+  color: #595959;
+}
+.content .field {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+.field input {
+  height: 100%;
+  width: 100%;
+  padding-left: 45px;
+  padding-right: 45px; 
+  font-size: 18px;
+  outline: none;
+  border: none;
+  color: #595959;
+  background: #dde1e7;
+  border-radius: 25px;
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73;
+}
+.field input:focus {
+  box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #ffffff73;
+}
+/* Универсальный отступ между полями */
+.field:not(.metrics-form .field):not(.goal-form .field):not(:first-child) {
+  margin-top: 20px;
+}
+.field span {
+  position: absolute;
+  width: 50px;
+  line-height: 50px;
+  color: #595959;
+}
+.field label {
+  position: absolute;
+  top: 50%;
+  left: 45px;
+  pointer-events: none;
+  color: #666666;
+  transform: translateY(-50%);
+}
+.field input:valid ~ label {
+  opacity: 0;
+}
+.password-field .show-password-toggle {
+  position: absolute;
+  top: 0;
+  right: 0; 
+  width: 50px;
+  line-height: 50px;
+  text-align: center;
+  color: #595959;
+  cursor: pointer; 
+  z-index: 10; 
+}
+.forgot-pass {
+  text-align: left;
+  margin: 10px 0 10px 5px;
+}
+.forgot-pass a {
+  font-size: 16px;
+  color: #3498db;
+  text-decoration: none;
+}
+.forgot-pass:hover a {
+  text-decoration: underline;
+}
+button {
+  margin: 15px 0;
+  width: 100%;
+  height: 50px;
+  color: #595959;
+  font-size: 18px;
+  font-weight: 600;
+  background: #dde1e7;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 25px;
+  box-shadow: 2px 2px 5px #babecc, -5px -5px 10px #ffffff73;
+}
+button:focus {
+  color: #3498db;
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73;
+}
+.signup {
+  font-size: 16px;
+  color: #595959;
+  margin: 10px 0;
+}
+.signup a {
+  color: #3498db;
+  text-decoration: none;
+}
+.signup a:hover {
+  text-decoration: underline;
+}
+
+/* ------------------------------------------- */
+/* СТИЛИ ДЛЯ ДАШБОРДА BMI */
+/* ------------------------------------------- */
+
+.dashboard-container {
+  display: flex;
+  width: 90%; 
+  max-width: 1200px;
+  height: 750px; 
+  background: #dde1e7;
+  border-radius: 20px;
+  box-shadow: -7px -7px 15px #ffffff, 7px 7px 15px rgba(94, 104, 121, 0.3); 
+  padding: 15px;
+}
+
+/* --- Боковая панель --- */
+.sidebar {
+  width: 280px;
+  flex-shrink: 0; 
+  background: #dde1e7;
+  border-radius: 15px;
+  margin-right: 15px;
+  padding: 20px 0;
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar-header {
+    font-size: 24px;
+    font-weight: 600;
+    color: #595959;
+    padding: 0 20px 20px;
+    text-align: left;
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px 30px;
+  text-align: left;
+}
+.profile-avatar-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 2px 2px 5px #babecc, -5px -5px 10px #ffffff73;
+  margin-right: 15px;
+  object-fit: cover;
+}
+.profile-name {
+  font-weight: 600;
+  color: #595959;
+}
+.profile-id {
+  font-size: 12px;
+  color: #888;
+}
+
+.sidebar-nav {
+    flex-grow: 1;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  margin: 5px 10px;
+  color: #595959;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border-radius: 10px;
+}
+.nav-item i {
+  width: 30px;
+  text-align: center;
+}
+.nav-item:hover {
+  color: #3498db;
+}
+.nav-item.active {
+    color: #3498db;
+    background: #dde1e7;
+    box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73;
+}
+.sidebar-footer {
+    padding: 20px 20px 20px 30px; 
+    font-size: 16px;
+    color: #595959;
+    cursor: pointer;
+    text-align: left;
+}
+.sidebar-footer i {
+    margin-right: 10px;
+}
+
+/* --- Main Content --- */
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Общие стили для панелей */
+.panel {
+  background: #dde1e7;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px rgba(94, 104, 121, 0.288);
+}
+.panel-header {
+  font-size: 18px;
+  font-weight: 600;
+  color: #595959;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+/* ------------------------------------------- */
+/* СТИЛИ ДЛЯ СТРАНИЦЫ OVERVIEW (bmi_dashboard.html) */
+/* ------------------------------------------- */
+
+/* 1. Overall Data */
+.overall-data {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+.data-card {
+  background: #dde1e7;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73;
+}
+.data-text {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 5px;
+}
+.data-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #595959;
+}
+.data-value small {
+    font-size: 16px;
+    font-weight: 400;
+    color: #888;
+}
+.healthy-status { color: #27ae60; }
+.change-negative { color: #c0392b; }
+
+/* 2. Chart Panel (Line Chart) */
+.chart-panel {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.chart-container {
+    flex-grow: 1;
+    position: relative;
+    width: 100%;
+    min-height: 200px;
+}
+
+/* 3. Goals Panel (Doughnut Charts) */
+.goals-panel {
+    height: 250px;
+    padding-bottom: 30px;
+}
+.goals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    height: 100%;
+    align-items: start;
+}
+.goal-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.chart-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 15px;
+    border-radius: 50%;
+    box-shadow: inset 5px 5px 10px #babecc, inset -5px -5px 10px #ffffff;
+    padding: 10px;
+}
+.chart-center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    font-weight: 600;
+    color: #595959;
+    text-align: center;
+    pointer-events: none;
+}
+.chart-center-text small {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    color: #888;
+}
+.goal-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #595959;
+}
+
+/* ------------------------------------------- */
+/* СТИЛИ ДЛЯ СТРАНИЦЫ MY METRICS */
+/* ------------------------------------------- */
+
+/* 1. Форма ввода (Update Metrics) */
+.input-panel {
+    display: flex;
+    flex-direction: column;
+}
+.metrics-form {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    width: 100%;
+}
+.metrics-form .field {
+    height: 45px;
+    flex: 1;
+    margin: 0 !important; 
+}
+.metrics-form .field input {
+    height: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+    border-radius: 15px;
+}
+.update-btn {
+    width: 120px;
+    height: 45px;
+    margin: 0;
+    background: #3498db;
+    color: #fff;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    box-shadow: 3px 3px 8px #babecc, -3px -3px 8px #ffffff;
+    transition: 0.2s;
+    flex-shrink: 0; 
+}
+.update-btn:active {
+    box-shadow: inset 3px 3px 8px #217dbb, inset -3px -3px 8px #4eb0f9;
+}
+
+/* 2. Сетка статистики */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+.stat-card {
+    background: #dde1e7;
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px rgba(94, 104, 121, 0.288);
+}
+.stat-card i {
+    font-size: 24px;
+    color: #3498db;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: #dde1e7;
+    border-radius: 50%;
+    box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73;
+}
+.stat-info span {
+    font-size: 12px;
+    color: #888;
+    display: block;
+}
+.stat-info h3 {
+    font-size: 18px;
+    color: #595959;
+    margin: 0;
+}
+
+/* 3. Нижний ряд (История и График) */
+.metrics-bottom-row {
+    display: flex;
+    gap: 15px;
+    flex-grow: 1; 
+    min-height: 0; 
+}
+.history-panel {
+    flex: 1;
+    overflow: hidden;
+}
+.weight-chart-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.chart-container-small {
+    flex-grow: 1;
+    position: relative;
+    width: 100%;
+}
+
+/* 4. Неоморфическая Таблица */
+.table-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+/* Стили скроллбара для таблицы */
+.table-container::-webkit-scrollbar {
+    width: 6px;
+}
+.table-container::-webkit-scrollbar-thumb {
+    background: #babecc;
+    border-radius: 10px;
+}
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: #a9b7c8;
+}
+
+.neumorphic-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+.neumorphic-table th {
+    text-align: left;
+    color: #888;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 0 15px;
+}
+.neumorphic-table tbody tr {
+    background: #dde1e7;
+    box-shadow: -2px -2px 5px #ffffff73, 2px 2px 5px rgba(94, 104, 121, 0.2);
+    border-radius: 10px;
+    transition: transform 0.2s;
+}
+.neumorphic-table tbody tr:hover {
+    transform: scale(1.01);
+}
+.neumorphic-table td {
+    padding: 12px 15px;
+    color: #595959;
+    font-size: 14px;
+}
+.neumorphic-table td:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.neumorphic-table td:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.status-good {
+    color: #27ae60;
+    font-weight: 600;
+}
+.status-warn {
+    color: #e67e22;
+    font-weight: 600;
+}
+
+
+/* ------------------------------------------- */
+/* СТИЛИ ДЛЯ СТРАНИЦЫ DAILY INTAKE */
+/* ------------------------------------------- */
+
+/* Топ-секция */
+.daily-intake-top-row {
+    display: flex;
+    gap: 15px;
+    height: 250px;
+}
+
+/* 1. Панель Калорий */
+.calories-panel {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+}
+.calorie-summary {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    padding: 0 10px;
+}
+.calorie-box {
+    text-align: center;
+}
+.calorie-box .value {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #595959;
+    text-shadow: 
+        -2px -2px 3px #ffffff, 
+        2px 2px 3px rgba(94, 104, 121, 0.4); 
+}
+.calorie-box .label {
+    font-size: 14px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.calorie-box.eaten .value {
+    color: #e74c3c; 
+}
+.calorie-box.remaining .value {
+    color: #27ae60; 
+}
+.equals-icon {
+    font-size: 24px;
+    color: #888;
+    position: relative;
+    top: -5px;
+}
+
+/* 2. Панель Макронутриентов */
+.macros-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 0; 
+}
+.macro-chart-wrapper {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    box-shadow: inset 5px 5px 10px #babecc, inset -5px -5px 10px #ffffff;
+    padding: 10px;
+}
+
+/* 3. Форма ввода (Add New Food Entry) */
+.input-panel-intake {
+    display: flex;
+    flex-direction: column;
+}
+.intake-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+}
+.intake-form .field:first-child {
+    flex: 2;
+}
+.intake-field-small {
+    flex: 1; 
+}
+.intake-form .field {
+    height: 40px;
+    margin: 0 !important; 
+}
+.intake-form .field input {
+    height: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+    border-radius: 12px;
+}
+.intake-form .update-btn {
+    height: 40px;
+    width: 100px;
+    font-size: 13px;
+    border-radius: 12px;
+    flex-shrink: 0; 
+}
+
+
+/* 4. Таблица истории приемов пищи */
+.history-panel-intake {
+    flex-grow: 1;
+    min-height: 0;
+}
+.table-container-intake {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+.neumorphic-table-intake {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
+.neumorphic-table-intake th {
+    text-align: left;
+    color: #888;
+    font-weight: 500;
+    font-size: 13px;
+    padding: 0 15px;
+}
+.neumorphic-table-intake tbody tr {
+    background: #dde1e7;
+    box-shadow: -2px -2px 5px #ffffff73, 2px 2px 5px rgba(94, 104, 121, 0.2);
+    border-radius: 10px;
+    transition: transform 0.2s;
+}
+.neumorphic-table-intake tbody tr:hover {
+    transform: scale(1.005);
+}
+.neumorphic-table-intake td {
+    padding: 10px 15px;
+    color: #595959;
+    font-size: 13px;
+    white-space: nowrap;
+}
+.neumorphic-table-intake td:last-child {
+    text-align: right;
+    width: 30px;
+}
+.delete-icon {
+    color: #c0392b;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+.delete-icon:hover {
+    opacity: 1;
+}
+
+/* ------------------------------------------- */
+/* СТИЛИ ДЛЯ СТРАНИЦЫ GOALS (ФИНАЛЬНЫЕ ИСПРАВЛЕНИЯ) */
+/* ------------------------------------------- */
+
+/* 1. Goal Setting Form */
+.goal-setting-panel {
+    margin-bottom: 15px;
+    flex-shrink: 0; 
+}
+.goal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.goal-form .form-row {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+}
+.goal-form .field {
+    display: flex;
+    flex-direction: column;
+    margin: 0 !important;
+    height: auto; 
+    /* СБРОС СТИЛЕЙ: Переопределяем стили .field из секции Логина/Регистрации */
+    position: relative; 
+}
+.goal-form label {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 5px;
+    text-align: left;
+    font-weight: 500;
+
+    /* КЛЮЧЕВОЙ ФИКС: Отменяем абсолютное позиционирование лейбла */
+    position: static; 
+    top: auto;
+    left: auto;
+    transform: none;
+    opacity: 1; /* Гарантируем видимость */
+}
+
+/* Стилизация всех полей ввода, включая select и date */
+.goal-form input,
+.goal-form select {
+    height: 45px;
+    padding: 0 15px;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    color: #595959;
+    background: #dde1e7;
+    border-radius: 12px;
+    box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73;
+    width: 100%;
+    padding-right: 40px; 
+}
+
+/* СТИЛИЗАЦИЯ ВЫПАДАЮЩЕГО МЕНЮ (SELECT) */
+.goal-form select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+/* Кастомная стрелка Font Awesome для Select */
+.field:has(select)::after {
+    content: "\f0d7"; 
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    /* Позиция относительно ВЕРХНЕГО края поля ввода, не контейнера .field */
+    transform: translateY(10px); 
+    pointer-events: none; 
+    color: #595959;
+    font-size: 18px;
+    transition: color 0.2s;
+}
+.field:has(select):hover::after {
+    color: #3498db;
+}
+
+/* Стили для даты (убираем стандартную иконку календаря и добавляем свою) */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    width: 30px;
+    cursor: pointer;
+}
+.field:has(input[type="date"])::after {
+    content: "\f073"; 
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(10px); 
+    pointer-events: none; 
+    color: #595959;
+    font-size: 16px;
+}
+
+
+/* ИСПРАВЛЕНИЯ ДЛЯ ШИРИНЫ ПОЛЕЙ */
+.goal-field-small {
+    flex: 1.2; 
+}
+.goal-field-large {
+    flex: 2; 
+}
+.goal-field-full {
+    flex: 1; 
+}
+.goals-btn {
+    width: 150px;
+    align-self: flex-start; 
+    margin-top: 5px;
+}
+
+/* 2. Goals Tracking List (Симметрия) */
+
+/* Контейнер для активных и завершенных целей - делится на 2 столбца (Обеспечивает симметрию ширины) */
+.goals-grid-container {
+    display: grid;
+    grid-template-columns: minmax(300px, 1fr) minmax(300px, 1fr); 
+    gap: 15px;
+    flex-grow: 1; 
+    min-height: 0; 
+}
+
+/* Обе панели целей имеют одинаковую высоту и скролл (Обеспечивает симметрию высоты) */
+.goals-active-panel,
+.goals-completed-panel {
+    display: flex;
+    flex-direction: column; 
+    min-height: 0; 
+    height: 100%; 
+}
+
+/* Контейнер списка внутри каждой панели - получает скролл */
+.goals-list-container {
+    flex-grow: 1; 
+    overflow-y: auto; 
+    padding-right: 5px; 
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Стиль скроллбара (для Webkit) */
+.goals-list-container::-webkit-scrollbar {
+    width: 6px;
+}
+.goals-list-container::-webkit-scrollbar-thumb {
+    background: #babecc;
+    border-radius: 10px;
+}
+.goals-list-container::-webkit-scrollbar-thumb:hover {
+    background: #a9b7c8;
+}
+
+/* Карточка цели (Goal Card) - они симметричны по структуре */
+.goal-card {
+    display: flex;
+    align-items: center;
+    background: #dde1e7;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: -2px -2px 5px #ffffff73, 2px 2px 5px rgba(94, 104, 121, 0.2);
+    transition: transform 0.2s;
+    flex-shrink: 0; 
+}
+.goal-card:hover {
+    transform: scale(1.005);
+}
+
+.goal-icon {
+    font-size: 24px;
+    color: #3498db;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    background: #dde1e7;
+    border-radius: 50%;
+    box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.goal-details {
+    flex-grow: 1;
+    text-align: left;
+    min-width: 0; 
+}
+.goal-title {
+    font-weight: 600;
+    color: #595959;
+    font-size: 15px;
+    margin-bottom: 3px;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+.goal-target {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+.goal-target strong {
+    color: #3498db;
+    font-weight: 700;
+}
+
+.goal-progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-bottom: 3px;
+    color: #888;
+}
+.progress-percent {
+    font-weight: 600;
+    color: #e74c3c; 
+}
+
+.progress-bar-wrapper {
+    background: #babecc; 
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.2);
+}
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: #e74c3c; 
+    border-radius: 4px;
+    transition: width 0.4s ease;
+}
+
+.goal-actions i {
+    font-size: 18px;
+    margin-left: 15px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.delete-icon {
+    color: #c0392b;
+}
+.check-icon {
+    color: #27ae60;
+}
+.history-icon {
+    color: #888;
+}
+
+/* Стили для завершенных целей */
+.goal-card.completed {
+    opacity: 0.7;
+    box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73;
+}
+.goal-card.completed .goal-icon {
+    color: #3498db;
+}
+
+/* ---------------------------------------------------- */
+/* СТИЛИ ДЛЯ СТРАНИЦЫ SETTINGS (Settings-specific styles) */
+/* ---------------------------------------------------- */
+
+/* Главный контейнер для контента настроек */
+.settings-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Расстояние между панелями */
+}
+
+/* Общий стиль панели (если .panel не определен выше) */
+.settings-panel {
+    /* Наследует общий стиль .panel, если он есть */
+    /* Если его нет, добавьте базовый неоморфизм: */
+    /*
+    background: #dde1e7;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px rgba(94, 104, 121, 0.288);
+    margin-bottom: 15px;
+    */
+}
+
+/* Заголовок панели */
+.settings-panel .panel-header {
+    font-size: 18px;
+    font-weight: 600;
+    color: #595959;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Формы настроек - Используют ту же базовую структуру flex */
+.settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.settings-form .form-row {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+}
+
+/* Общее поле ввода и его обертка */
+.settings-form .field {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: auto; 
+    min-width: 0;
+    margin: 0 !important; /* Сброс внешних конфликтов */
+}
+
+/* Ширина полей */
+.setting-field-full { flex: 1; }
+.setting-field-half { flex: 1; }
+.setting-field-third { flex: 1; }
+
+/* Стиль Label */
+.settings-form label {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 5px;
+    text-align: left;
+    font-weight: 500;
+    
+    /* Критические сбросы для Label, чтобы быть НАД полем */
+    position: static !important; 
+    transform: none !important;
+}
+
+/* Стиль Input (Неоморфизм) */
+.settings-form input {
+    height: 45px;
+    padding: 0 15px;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    color: #595959;
+    background: #dde1e7;
+    border-radius: 12px;
+    /* Неоморфический стиль поля ввода */
+    box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73;
+    width: 100%;
+    transition: box-shadow 0.2s;
+}
+
+/* Иконка календаря для поля Date */
+.settings-form input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    width: 30px;
+    cursor: pointer;
+}
+.settings-form .field:has(input[type="date"])::after {
+    content: "\f073"; /* fa-calendar-alt */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    /* Центрирование иконки в поле ввода высотой 45px */
+    transform: translateY(10px); 
+    pointer-events: none; 
+    color: #595959;
+    font-size: 16px;
+}
+
+/* Кнопки настроек */
+.settings-btn {
+    /* Если у .update-btn нет стилей, они нужны здесь */
+    width: 180px;
+    height: 45px; 
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: 0.2s;
+    align-self: flex-start; /* Выравнивание по левому краю */
+    margin-top: 5px;
+    
+    /* Базовый синий цвет, если не переопределен .update-btn */
+    /*
+    background: #3498db;
+    color: #fff;
+    box-shadow: 3px 3px 8px #babecc, -3px -3px 8px #ffffff;
+    */
+}
+
+/* Security Button (Change Password) */
+.security-btn {
+    background-color: #e67e22; /* Оранжевый */
+}
+.security-btn:active {
+    box-shadow: inset 3px 3px 8px #a85a18, inset -3px -3px 8px #f19f5a;
+}
+
+/* ---------------------------------------------------- */
+/* НОВАЯ КНОПКА УДАЛЕНИЯ ВНИЗУ (Floating Delete Button) */
+/* ---------------------------------------------------- */
+
+/* Этот контейнер прижимает кнопку к правому нижнему углу */
+.floating-delete-btn-container {
+    width: 100%;
+    /* Дополнительный отступ, чтобы кнопка не прилипала к последней панели */
+    padding-top: 15px; 
+    /* Используем Flexbox для выравнивания по правому краю */
+    display: flex; 
+    justify-content: flex-end;
+    align-items: center;
+    /* Гарантируем, что контейнер идет после других панелей */
+    flex-shrink: 0;
+}
+
+/* Стили для самой кнопки */
+.delete-btn {
+    width: 200px;
+    height: 45px;
+    background-color: #c0392b; /* Красный */
+    color: #fff;
+    /* Применяем общий стиль кнопки update-btn, но с красным цветом */
+    box-shadow: 3px 3px 8px #babecc, -3px -3px 8px #ffffff;
+    
+    /* Сбрасываем лишние настройки, если они были */
+    margin: 0; 
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.delete-btn:active {
+    box-shadow: inset 3px 3px 8px #88221b, inset -3px -3px 8px #d64d4d;
+}
+
+/* Убедитесь, что эти старые стили удалены: */
+/*
+.danger-zone { ... }
+.danger-zone .panel-header { ... }
+.danger-info { ... }
+*/
