@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>My Metrics - BMI App</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <div class="sidebar">
+        <div class="sidebar-header">BMI Analysis</div>
+
+        <div class="profile-card">
+          <img src="media/man.png" alt="Profile" class="profile-avatar-img" />
+          <div class="profile-info">
+            <div class="profile-name">Alex Smith</div>
+            <div class="profile-id">ID: 450987</div>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="bmi_dashboard.html" class="nav-item">
+            <i class="fas fa-chart-line"></i> Overview
+          </a>
+          <a href="#" class="nav-item active">
+            <i class="fas fa-weight"></i> My Metrics
+          </a>
+          <a href="#" class="nav-item">
+            <i class="fas fa-calculator"></i> Daily Intake
+          </a>
+          <a href="#" class="nav-item">
+            <i class="fas fa-bullseye"></i> Goals
+          </a>
+          <a href="#" class="nav-item">
+            <i class="fas fa-cogs"></i> Settings
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <i class="fas fa-power-off"></i> Logout
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div class="panel input-panel">
+          <div class="panel-header">Update Today's Metrics</div>
+          <form class="metrics-form">
+            <div class="field">
+              <input type="number" placeholder="Weight (kg)" required />
+            </div>
+            <div class="field">
+              <input type="number" placeholder="Waist (cm)" />
+            </div>
+            <div class="field">
+              <input type="number" placeholder="Hips (cm)" />
+            </div>
+            <button type="button" class="update-btn">Save Entry</button>
+          </form>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <i class="fas fa-ruler-vertical"></i>
+            <div class="stat-info">
+              <span>Height</span>
+              <h3>182 cm</h3>
+            </div>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-birthday-cake"></i>
+            <div class="stat-info">
+              <span>Age</span>
+              <h3>28 yrs</h3>
+            </div>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-tint"></i>
+            <div class="stat-info">
+              <span>Blood</span>
+              <h3>A+</h3>
+            </div>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-running"></i>
+            <div class="stat-info">
+              <span>Activity</span>
+              <h3>Moderate</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="metrics-bottom-row">
+          <div class="panel history-panel">
+            <div class="panel-header">Recent History</div>
+            <div class="table-container">
+              <table class="neumorphic-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Weight</th>
+                    <th>BMI</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Today</td>
+                    <td>75.5 kg</td>
+                    <td>22.5</td>
+                    <td class="status-good">Normal</td>
+                  </tr>
+                  <tr>
+                    <td>May 10</td>
+                    <td>76.0 kg</td>
+                    <td>22.8</td>
+                    <td class="status-good">Normal</td>
+                  </tr>
+                  <tr>
+                    <td>May 02</td>
+                    <td>76.5 kg</td>
+                    <td>23.0</td>
+                    <td class="status-warn">High</td>
+                  </tr>
+                  <tr>
+                    <td>Apr 25</td>
+                    <td>77.0 kg</td>
+                    <td>23.2</td>
+                    <td class="status-warn">High</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel weight-chart-panel">
+            <div class="panel-header">Weight Trend</div>
+            <div class="chart-container-small">
+              <canvas id="weightChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // График веса (Weight Chart)
+      const ctxWeight = document.getElementById("weightChart").getContext("2d");
+      new Chart(ctxWeight, {
+        type: "line",
+        data: {
+          labels: ["Apr 25", "May 02", "May 10", "Today"],
+          datasets: [
+            {
+              label: "Weight (kg)",
+              data: [77.0, 76.5, 76.0, 75.5],
+              borderColor: "#3498db",
+              backgroundColor: "rgba(52, 152, 219, 0.1)",
+              borderWidth: 3,
+              tension: 0.4,
+              fill: true,
+              pointBackgroundColor: "#dde1e7",
+              pointBorderColor: "#3498db",
+              pointRadius: 5,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+          },
+          scales: {
+            y: {
+              beginAtZero: false,
+              min: 74,
+              max: 79,
+              grid: { color: "#e0e0e0", borderDash: [5, 5] },
+            },
+            x: { grid: { display: false } },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

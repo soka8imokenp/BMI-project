@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>BMI Dashboard UI</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <div class="sidebar">
+        <div class="sidebar-header">BMI Analysis</div>
+
+        <div class="profile-card">
+          <img src="media/man.png" alt="Profile" class="profile-avatar-img" />
+          <div class="profile-info">
+            <div class="profile-name">Soka</div>
+            <div class="profile-id">ID: 450987</div>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="#" class="nav-item active"
+            ><i class="fas fa-chart-line"></i> Overview</a
+          >
+          <a href="#" class="nav-item"
+            ><i class="fas fa-weight"></i> My Metrics</a
+          >
+          <a href="#" class="nav-item"
+            ><i class="fas fa-calculator"></i> Daily Intake</a
+          >
+          <a href="#" class="nav-item"><i class="fas fa-bullseye"></i> Goals</a>
+          <a href="#" class="nav-item"><i class="fas fa-cogs"></i> Settings</a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <i class="fas fa-power-off"></i> Logout
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div class="overall-data">
+          <div class="data-card">
+            <div class="data-text">Current BMI</div>
+            <div class="data-value">22.5</div>
+          </div>
+          <div class="data-card">
+            <div class="data-text">Category</div>
+            <div class="data-value healthy-status">Healthy Weight</div>
+          </div>
+          <div class="data-card">
+            <div class="data-text">Ideal Weight</div>
+            <div class="data-value">75 <small>kg</small></div>
+          </div>
+          <div class="data-card">
+            <div class="data-text">Weekly Change</div>
+            <div class="data-value change-negative">-0.5 <small>kg</small></div>
+          </div>
+        </div>
+
+        <div class="panel chart-panel">
+          <div class="panel-header">BMI Progress History</div>
+          <div class="chart-container">
+            <canvas id="bmiChart"></canvas>
+          </div>
+        </div>
+
+        <div class="panel goals-panel">
+          <div class="panel-header">Goal Summary (Daily)</div>
+          <div class="goals-grid">
+            <div class="goal-item">
+              <div class="chart-wrapper">
+                <canvas id="caloriesChart"></canvas>
+                <div class="chart-center-text">1800<small>/2000</small></div>
+              </div>
+              <div class="goal-label">Calories</div>
+            </div>
+
+            <div class="goal-item">
+              <div class="chart-wrapper">
+                <canvas id="stepsChart"></canvas>
+                <div class="chart-center-text">8500<small>/10k</small></div>
+              </div>
+              <div class="goal-label">Steps</div>
+            </div>
+
+            <div class="goal-item">
+              <div class="chart-wrapper">
+                <canvas id="waterChart"></canvas>
+                <div class="chart-center-text">2.5<small>/3 L</small></div>
+              </div>
+              <div class="goal-label">Water</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Общие настройки цветов
+      const colorPrimary = "#3498db";
+      const colorBackground = "#cbced5"; // Цвет пустой части графика (тень)
+
+      // 1. ЛИНЕЙНЫЙ ГРАФИК (BMI)
+      const ctxBmi = document.getElementById("bmiChart").getContext("2d");
+      new Chart(ctxBmi, {
+        type: "line",
+        data: {
+          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+          datasets: [
+            {
+              label: "BMI",
+              data: [23.5, 23.0, 22.8, 22.4, 22.5, 22.2],
+              borderColor: colorPrimary,
+              backgroundColor: "rgba(52, 152, 219, 0.1)", // Легкая заливка под графиком
+              borderWidth: 3,
+              tension: 0.4, // Плавность линий
+              pointBackgroundColor: "#dde1e7",
+              pointBorderColor: colorPrimary,
+              pointBorderWidth: 2,
+              pointRadius: 4,
+              fill: true,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false }, // Скрываем легенду
+            tooltip: {
+              backgroundColor: "#595959",
+              titleColor: "#fff",
+              bodyColor: "#fff",
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: false,
+              min: 20,
+              max: 25,
+              grid: {
+                color: "#e0e0e0",
+                borderDash: [5, 5],
+              },
+              ticks: { color: "#888" },
+            },
+            x: {
+              grid: { display: false },
+              ticks: { color: "#888" },
+            },
+          },
+        },
+      });
+
+      // ФУНКЦИЯ ДЛЯ СОЗДАНИЯ КРУГОВЫХ ДИАГРАММ
+      function createDoughnut(id, value, max) {
+        const ctx = document.getElementById(id).getContext("2d");
+        const remaining = max - value;
+
+        new Chart(ctx, {
+          type: "doughnut",
+          data: {
+            labels: ["Done", "Left"],
+            datasets: [
+              {
+                data: [value, remaining],
+                backgroundColor: [colorPrimary, "transparent"], // Прозрачный для пустой части
+                borderColor: [colorPrimary, "#babecc"], // Цвет границ
+                borderWidth: [0, 2], // Граница только у пустой части для эффекта "канавки"
+                hoverBackgroundColor: [colorPrimary, "transparent"],
+                hoverBorderColor: [colorPrimary, "#babecc"],
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: "85%", // Толщина кольца (чем больше %, тем тоньше)
+            plugins: {
+              legend: { display: false },
+              tooltip: { enabled: false }, // Отключаем подсказки
+            },
+            animation: {
+              animateScale: true,
+              animateRotate: true,
+            },
+          },
+        });
+      }
+
+      // Инициализация графиков целей
+      createDoughnut("caloriesChart", 1800, 2000);
+      createDoughnut("stepsChart", 8500, 10000);
+      createDoughnut("waterChart", 2.5, 3);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Registration UI</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="content">
+      <div class="text">Sign Up</div>
+      <form action="#">
+        <div class="field">
+          <span class="fas fa-user"></span>
+          <input type="text" required />
+          <label>Email or Phone</label>
+        </div>
+
+        <div class="field password-field">
+          <span class="fas fa-lock"></span>
+          <input type="password" required id="passwordInput" />
+          <label>Password</label>
+          <span
+            class="fas fa-eye show-password-toggle"
+            data-target="passwordInput"
+          ></span>
+        </div>
+
+        <div class="field password-field">
+          <span class="fas fa-lock"></span>
+          <input type="password" required id="confirmPasswordInput" />
+          <label>Confirm Password</label>
+          <span
+            class="fas fa-eye show-password-toggle"
+            data-target="confirmPasswordInput"
+          ></span>
+        </div>
+
+        <button>Create Account</button>
+
+        <div class="signup">
+          Already a member?
+          <a href="#">login now </a>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      const togglePasswords = document.querySelectorAll(
+        ".show-password-toggle"
+      );
+
+      togglePasswords.forEach((toggle) => {
+        toggle.addEventListener("click", function () {
+          const targetId = this.getAttribute("data-target");
+          const passwordInput = document.getElementById(targetId);
+
+          // Переключение типа поля между 'password' и 'text'
+          const type =
+            passwordInput.getAttribute("type") === "password"
+              ? "text"
+              : "password";
+          passwordInput.setAttribute("type", type);
+
+          // Переключение иконки "глазика"
+          this.classList.toggle("fa-eye");
+          this.classList.toggle("fa-eye-slash");
+        });
+      });
+    </script>
+  </body>
+</html>

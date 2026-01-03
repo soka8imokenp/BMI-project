@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Daily Intake - BMI App</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <div class="sidebar">
+        <div class="sidebar-header">BMI Analysis</div>
+
+        <div class="profile-card">
+          <img src="media/man.png" alt="Profile" class="profile-avatar-img" />
+          <div class="profile-info">
+            <div class="profile-name">Soka</div>
+            <div class="profile-id">ID: 450987</div>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="bmi_dashboard.html" class="nav-item">
+            <i class="fas fa-chart-line"></i> Overview
+          </a>
+          <a href="metrics.html" class="nav-item">
+            <i class="fas fa-weight"></i> My Metrics
+          </a>
+          <a href="#" class="nav-item active">
+            <i class="fas fa-calculator"></i> Daily Intake
+          </a>
+          <a href="#" class="nav-item">
+            <i class="fas fa-bullseye"></i> Goals
+          </a>
+          <a href="#" class="nav-item">
+            <i class="fas fa-cogs"></i> Settings
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <i class="fas fa-power-off"></i> Logout
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div class="daily-intake-top-row">
+          <div class="panel calories-panel">
+            <div class="panel-header">Calories Remaining Today</div>
+            <div class="calorie-summary">
+              <div class="calorie-box goal">
+                <div class="value">2000</div>
+                <div class="label">Goal</div>
+              </div>
+              <div class="calorie-box eaten">
+                <div class="value">-1300</div>
+                <div class="label">Eaten</div>
+              </div>
+              <i class="fas fa-equals equals-icon"></i>
+              <div class="calorie-box remaining">
+                <div class="value">700</div>
+                <div class="label">Remaining</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel macros-panel">
+            <div class="panel-header">Macronutrient Breakdown (g)</div>
+            <div class="macro-chart-wrapper">
+              <canvas id="macroChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel input-panel-intake">
+          <div class="panel-header">Add New Food Entry</div>
+          <form class="intake-form">
+            <div class="field">
+              <input type="text" placeholder="Food Name " required />
+            </div>
+            <div class="field intake-field-small">
+              <input type="number" placeholder="Calories " />
+            </div>
+            <div class="field intake-field-small">
+              <input type="number" placeholder="Protein " />
+            </div>
+            <div class="field intake-field-small">
+              <input type="number" placeholder="Carbs " />
+            </div>
+            <div class="field intake-field-small">
+              <input type="number" placeholder="Fat " />
+            </div>
+            <button type="button" class="update-btn">Add Meal</button>
+          </form>
+        </div>
+
+        <div class="panel history-panel-intake">
+          <div class="panel-header">Meal History</div>
+          <div class="table-container-intake">
+            <table class="neumorphic-table-intake">
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Meal</th>
+                  <th>Food Name</th>
+                  <th>Calories (kcal)</th>
+                  <th>P/C/F (g)</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>08:00</td>
+                  <td>Breakfast</td>
+                  <td>Oatmeal with Berries</td>
+                  <td>350</td>
+                  <td>12 / 60 / 7</td>
+                  <td><i class="fas fa-trash-alt delete-icon"></i></td>
+                </tr>
+                <tr>
+                  <td>13:00</td>
+                  <td>Lunch</td>
+                  <td>Grilled Chicken Salad</td>
+                  <td>450</td>
+                  <td>55 / 15 / 18</td>
+                  <td><i class="fas fa-trash-alt delete-icon"></i></td>
+                </tr>
+                <tr>
+                  <td>19:00</td>
+                  <td>Dinner</td>
+                  <td>Rice with Salmon</td>
+                  <td>500</td>
+                  <td>33 / 40 / 22</td>
+                  <td><i class="fas fa-trash-alt delete-icon"></i></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Цвета для макросов
+      const proteinColor = "#e74c3c";
+      const carbsColor = "#f1c40f";
+      const fatColor = "#2ecc71";
+      const backgroundPrimary = "#dde1e7";
+
+      // 1. MACRO DOUGHNUT CHART
+      const ctxMacro = document.getElementById("macroChart").getContext("2d");
+      new Chart(ctxMacro, {
+        type: "doughnut",
+        data: {
+          labels: ["Protein", "Carbs", "Fat"],
+          datasets: [
+            {
+              data: [90 * 4, 110 * 4, 50 * 9],
+              backgroundColor: [proteinColor, carbsColor, fatColor],
+              borderColor: backgroundPrimary,
+              borderWidth: 5,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: "80%",
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: "#595959",
+              titleColor: "#fff",
+              bodyColor: "#fff",
+              callbacks: {
+                label: function (context) {
+                  let label = context.label || "";
+                  if (label) {
+                    label += ": ";
+                  }
+                  const rawData = [90, 110, 50];
+                  const index = context.dataIndex;
+                  label += rawData[index] + "g";
+                  return label;
+                },
+              },
+            },
+          },
+          animation: {
+            animateScale: true,
+            animateRotate: true,
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

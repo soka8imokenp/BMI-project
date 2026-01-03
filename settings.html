@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Settings - BMI App</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="dashboard-container">
+
+      <div class="sidebar">
+        <div class="sidebar-header">BMI Analysis</div>
+        
+        <div class="profile-card">
+          <img src="media/man.png" alt="Profile" class="profile-avatar-img" />
+          <div class="profile-info">
+            <div class="profile-name">Alex Smith</div>
+            <div class="profile-id">ID: 450987</div>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="bmi_dashboard.html" class="nav-item">
+            <i class="fas fa-chart-line"></i> Overview
+          </a>
+          <a href="metrics.html" class="nav-item">
+            <i class="fas fa-weight"></i> My Metrics
+          </a>
+          <a href="daily_intake.html" class="nav-item">
+            <i class="fas fa-calculator"></i> Daily Intake
+          </a>
+          <a href="goals.html" class="nav-item">
+            <i class="fas fa-bullseye"></i> Goals
+          </a>
+          <a href="#" class="nav-item active">
+            <i class="fas fa-cogs"></i> Settings
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <i class="fas fa-power-off"></i> Logout
+        </div>
+      </div>
+
+      <div class="main-content settings-content">
+        
+        <div class="panel settings-panel">
+            <div class="panel-header">Profile Settings</div>
+            <form class="settings-form profile-form">
+                
+                <div class="form-row">
+                    <div class="field setting-field-half">
+                        <label for="full-name">Full Name</label>
+                        <input type="text" id="full-name" value="Alex Smith" required>
+                    </div>
+                    <div class="field setting-field-half">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" value="alex.smith@example.com" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="field setting-field-third">
+                        <label for="settings-height">Height (cm)</label>
+                        <input type="number" id="settings-height" value="180" required>
+                    </div>
+                    <div class="field setting-field-third">
+                        <label for="settings-weight">Current Weight (kg)</label>
+                        <input type="number" id="settings-weight" value="82.5" required>
+                    </div>
+                    <div class="field setting-field-third">
+                        <label for="settings-dob">Date of Birth</label>
+                        <input type="date" id="settings-dob" value="1995-05-20" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="update-btn settings-btn">Save Profile</button>
+            </form>
+        </div>
+        
+        <div class="panel settings-panel">
+            <div class="panel-header">Security Settings</div>
+            <form class="settings-form security-form">
+                
+                <div class="form-row">
+                    <div class="field setting-field-full">
+                        <label for="current-password">Current Password</label>
+                        <input type="password" id="current-password" placeholder="Enter current password" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="field setting-field-half">
+                        <label for="new-password">New Password</label>
+                        <input type="password" id="new-password" placeholder="New password" required>
+                    </div>
+                    <div class="field setting-field-half">
+                        <label for="confirm-password">Confirm New Password</label>
+                        <input type="password" id="confirm-password" placeholder="Confirm new password" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="update-btn settings-btn security-btn">Change Password</button>
+            </form>
+        </div>
+
+        <div class="floating-delete-btn-container">
+            <button class="update-btn delete-btn">Delete Account</button>
+        </div>
+        
+      </div>
+    </div>
+  </body>
+</html>

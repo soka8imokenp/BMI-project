@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Goals - BMI App</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="dashboard-container">
+
+      <div class="sidebar">
+        <div class="sidebar-header">BMI Analysis</div>
+        
+        <div class="profile-card">
+          <img src="media/man.png" alt="Profile" class="profile-avatar-img" />
+          <div class="profile-info">
+            <div class="profile-name">Alex Smith</div>
+            <div class="profile-id">ID: 450987</div>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="bmi_dashboard.html" class="nav-item">
+            <i class="fas fa-chart-line"></i> Overview
+          </a>
+          <a href="metrics.html" class="nav-item">
+            <i class="fas fa-weight"></i> My Metrics
+          </a>
+          <a href="daily_intake.html" class="nav-item">
+            <i class="fas fa-calculator"></i> Daily Intake
+          </a>
+          <a href="#" class="nav-item active">
+            <i class="fas fa-bullseye"></i> Goals
+          </a>
+          <a href="#" class="nav-item">
+            <i class="fas fa-cogs"></i> Settings
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <i class="fas fa-power-off"></i> Logout
+        </div>
+      </div>
+
+      <div class="main-content">
+        
+        <div class="panel goal-setting-panel">
+            <div class="panel-header">Set a New Goal</div>
+            <form class="goal-form">
+                <div class="form-row">
+                    <div class="field goal-field-large">
+                        <label for="goal-type">Goal Type</label>
+                        <select id="goal-type">
+                            <option value="weight_loss">Weight Loss</option>
+                            <option value="weight_gain">Weight Gain</option>
+                            <option value="caloric_target">Caloric Target (kcal)</option>
+                            <option value="macro_protein">Protein Target (g)</option>
+                            <option value="steps">Daily Steps Target</option>
+                        </select>
+                    </div>
+
+                    <div class="field goal-field-small">
+                        <label for="target-value">Target Value</label>
+                        <input type="number" id="target-value" placeholder="e.g. 70 kg / 2200 kcal" required>
+                    </div>
+                </div>
+
+                <div class="field goal-field-full">
+                    <label for="start-date">Start Date</label>
+                    <input type="date" id="start-date" value="2024-01-01" required>
+                </div>
+
+                <button type="submit" class="update-btn goals-btn">Create Goal</button>
+            </form>
+        </div>
+        
+        <div class="goals-tracking-section goals-grid-container">
+            
+            <div class="panel goals-active-panel">
+                <div class="panel-header">Active Goals</div>
+                <div class="goals-list-container">
+                    
+                    <div class="goal-card">
+                        <div class="goal-icon"><i class="fas fa-weight-scale"></i></div>
+                        <div class="goal-details">
+                            <div class="goal-title">Weight Loss Goal</div>
+                            <div class="goal-target">From 85 kg to **75 kg** (Target Date: 31.03.2024)</div>
+                            <div class="goal-progress-info">
+                                <span class="current-value">Current: 82 kg</span> 
+                                <span class="progress-percent">30% Complete</span>
+                            </div>
+                            <div class="progress-bar-wrapper">
+                                <div class="progress-bar" style="width: 30%;"></div>
+                            </div>
+                        </div>
+                        <div class="goal-actions">
+                            <i class="fas fa-trash-alt delete-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="goal-card">
+                        <div class="goal-icon"><i class="fas fa-shoe-prints"></i></div>
+                        <div class="goal-details">
+                            <div class="goal-title">Daily Steps Target</div>
+                            <div class="goal-target">Achieve **10,000 steps** daily</div>
+                            <div class="goal-progress-info">
+                                <span class="current-value">Current Avg: 8,500 steps</span> 
+                                <span class="progress-percent" style="color: #2ecc71;">85% Complete</span>
+                            </div>
+                            <div class="progress-bar-wrapper">
+                                <div class="progress-bar" style="width: 85%; background-color: #2ecc71;"></div>
+                            </div>
+                        </div>
+                        <div class="goal-actions">
+                            <i class="fas fa-check-circle check-icon"></i>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="panel goals-completed-panel">
+                <div class="panel-header">Completed Goals</div>
+                <div class="goals-list-container">
+                    
+                     <div class="goal-card completed">
+                        <div class="goal-icon"><i class="fas fa-leaf"></i></div>
+                        <div class="goal-details">
+                            <div class="goal-title">Calorie Intake Goal</div>
+                            <div class="goal-target">Stay under **2,200 kcal** (Completed: 15.01.2024)</div>
+                            <div class="goal-progress-info">
+                                <span class="current-value">Status: Achieved!</span> 
+                                <span class="progress-percent" style="color: #3498db;">100% Complete</span>
+                            </div>
+                            <div class="progress-bar-wrapper">
+                                <div class="progress-bar" style="width: 100%; background-color: #3498db;"></div>
+                            </div>
+                        </div>
+                        <div class="goal-actions">
+                           <i class="fas fa-history history-icon"></i>
+                        </div>
+                    </div>
+                     <div class="goal-card completed">
+                        <div class="goal-icon"><i class="fas fa-dumbbell"></i></div>
+                        <div class="goal-details">
+                            <div class="goal-title">Protein Target Goal</div>
+                            <div class="goal-target">Achieve **180g** Protein (Completed: 01.02.2024)</div>
+                            <div class="goal-progress-info">
+                                <span class="current-value">Status: Achieved!</span> 
+                                <span class="progress-percent" style="color: #3498db;">100% Complete</span>
+                            </div>
+                            <div class="progress-bar-wrapper">
+                                <div class="progress-bar" style="width: 100%; background-color: #3498db;"></div>
+                            </div>
+                        </div>
+                        <div class="goal-actions">
+                           <i class="fas fa-history history-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>
