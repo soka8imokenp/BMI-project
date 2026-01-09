@@ -149,7 +149,7 @@ button:focus {
   height: 750px; 
   background: #dde1e7;
   border-radius: 20px;
-  box-shadow: -7px -7px 15px #ffffff, 7px 7px 15px rgba(94, 104, 121, 0.3); 
+  box-shadow: -7px -7px 15px #818080, 7px 7px 15px rgba(94, 104, 121, 0.3); 
   padding: 15px;
 }
 
@@ -745,13 +745,8 @@ button:focus {
     padding-right: 40px; 
 }
 
-/* СТИЛИЗАЦИЯ ВЫПАДАЮЩЕГО МЕНЮ (SELECT) */
-.goal-form select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    cursor: pointer;
-}
+
+
 /* Кастомная стрелка Font Awesome для Select */
 .field:has(select)::after {
     content: "\f0d7"; 
@@ -972,13 +967,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .settings-panel {
     /* Наследует общий стиль .panel, если он есть */
     /* Если его нет, добавьте базовый неоморфизм: */
-    /*
+    
     background: #dde1e7;
     border-radius: 15px;
     padding: 20px;
     box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px rgba(94, 104, 121, 0.288);
     margin-bottom: 15px;
-    */
+    
 }
 
 /* Заголовок панели */
@@ -1140,3 +1135,136 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .danger-zone .panel-header { ... }
 .danger-info { ... }
 */
+/* Выберите основной контейнер, чтобы фон охватывал всю область дашборда */
+/* Применяем фон к элементу body, который представляет всю страницу */
+body {
+    background-image: url('../media/green.jpg');
+    
+    /* Эти свойства гарантируют, что изображение будет красиво растянуто */
+    background-size: cover; /* Растягивает изображение, чтобы оно покрывало всю область */
+    background-position: center; /* Центрирует изображение */
+    background-repeat: no-repeat; /* Предотвращает повторение изображения */
+    background-attachment: fixed; /* Опционально: фон не будет прокручиваться вместе со страницей */
+    
+    /* Добавьте цвет фона в качестве запасного варианта */
+    background-color: #f0f0f0; 
+}
+
+/* ------------------------------------------- */
+/* CUSTOM NEUMORPHIC DROPDOWN (Полная замена для SELECT) */
+/* ------------------------------------------- */
+
+/* Контейнер для всего элемента. Используем .field из goals.html как обертку */
+.goal-form .field {
+    position: relative;
+    user-select: none;
+}
+
+/* 1. Скрываем настоящий SELECT */
+.goal-form select {
+    display: none !important; 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: 15px !important; 
+}
+
+/* Убираем кастомную стрелку, которая была в старом select */
+.field:has(select)::after {
+    content: none !important;
+}
+
+/* 2. ВЕРХНЯЯ ЧАСТЬ (Кнопка выбора) - ДОЛЖНА БЫТЬ ВДАВЛЕННОЙ */
+.select-selected {
+    background-color: #dde1e7;
+    border-radius: 12px;
+    padding: 12px 20px;
+    color: #595959;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 45px;
+    outline: none;
+    
+    /* 💥 ИСПРАВЛЕНИЕ: Neumorphism ВДАВЛЕННЫЙ (как поле ввода) */
+    box-shadow: inset 2px 2px 5px #babecc, 
+                inset -5px -5px 10px #ffffff73;
+    transition: all 0.3s ease;
+}
+
+/* Стрелочка в кастомной кнопке */
+.select-selected:after {
+    content: "\f0d7"; /* fa-caret-down */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #595959;
+    font-size: 18px;
+    transition: transform 0.3s, color 0.3s;
+}
+
+/* Когда меню активно: меняем цвет, чтобы показать, что элемент в фокусе */
+.select-selected.select-arrow-active {
+    color: #3498db;
+    /* Не меняем тень, она остается вдавленной */
+}
+.select-selected.select-arrow-active:after {
+    transform: rotate(180deg);
+    color: #3498db;
+}
+
+
+/* 3. ВЫПАДАЮЩИЙ СПИСОК (Само меню) - ДОЛЖЕН БЫТЬ ВЫПУКЛЫМ (парящим) */
+.select-items {
+    position: absolute;
+    background-color: #dde1e7;
+    top: 100%; 
+    left: 0;
+    right: 0;
+    z-index: 100;
+    border-radius: 12px; /* Красивые скругленные углы */
+    overflow: hidden;
+    
+    /* Neumorphism ВЫПУКЛЫЙ (парящий эффект) */
+    box-shadow: 5px 5px 15px rgba(94, 104, 121, 0.5), /* Темная тень */
+                -5px -5px 15px rgba(255, 255, 255, 0.5); /* Светлая тень */
+    
+    /* Анимация появления */
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(5px);
+    transition: all 0.3s ease-out;
+}
+
+/* Класс для показа меню */
+.select-items.select-show {
+    max-height: 300px; 
+    opacity: 1;
+    transform: translateY(10px);
+    pointer-events: auto;
+}
+
+/* 4. ОПЦИИ ВНУТРИ СПИСКА */
+.select-items div {
+    color: #595959;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(0,0,0,0.05); 
+    transition: background 0.2s, padding-left 0.2s;
+}
+
+.select-items div:last-child {
+    border-bottom: none;
+}
+
+/* Ховер эффект для опций */
+.select-items div:hover, .same-as-selected {
+    background-color: #e6e9ef;
+    color: #3498db;
+    padding-left: 25px; 
+} 
