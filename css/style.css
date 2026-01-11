@@ -1270,3 +1270,50 @@ body {
     color: #3498db;
     padding-left: 25px; 
 } 
+
+/* --- Стили для кнопки Logout в футере сайдбара --- */
+
+.logout-btn {
+    /* Базовый Neumorphic-стиль (выпуклость) */
+    display: flex;
+    align-items: center;
+    justify-content: last baseline;
+    text-align: left;
+    
+    /* Цвет кнопки: Серый фон, Белый текст */
+    background-color: #595959; /* Темно-серый фон */
+    color: #ffffff; /* Белый текст */
+    
+    padding: 10px 15px;
+    margin: 50px 80px 20px 20px; /* Отступы от краев сайдбара */
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none; /* Убираем подчеркивание у ссылки */
+    transition: all 0.2s ease;
+
+    /* Neumorphism Shadow (Выпуклость) */
+    box-shadow: 
+        6px 6px 12px #babecc, /* Темная тень справа/снизу */
+        -6px -6px 12px #ffffff; /* Светлая тень слева/сверху */
+}
+
+.logout-btn i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+/* Эффект нажатия (Active/Pressed look) */
+.logout-btn:active {
+    transform: scale(0.98); /* Небольшое сжатие */
+    
+    /* Внутренняя тень (вдавленность) */
+    box-shadow: 
+        inset 4px 4px 8px #454545, /* Внутренняя темная тень */
+        inset -4px -4px 8px #6d6d6d; /* Внутренняя светлая тень */
+    
+    /* Цвет текста можно немного приглушить при нажатии, если нужно */
+    color: #f0f0f0; 
+}
+
