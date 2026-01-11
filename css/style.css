@@ -1099,14 +1099,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* Этот контейнер прижимает кнопку к правому нижнему углу */
 .floating-delete-btn-container {
     width: 100%;
-    /* Дополнительный отступ, чтобы кнопка не прилипала к последней панели */
-    padding-top: 15px; 
+    
     /* Используем Flexbox для выравнивания по правому краю */
     display: flex; 
     justify-content: flex-end;
     align-items: center;
     /* Гарантируем, что контейнер идет после других панелей */
     flex-shrink: 0;
+    
+
 }
 
 /* Стили для самой кнопки */

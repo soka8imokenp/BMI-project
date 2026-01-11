@@ -102,101 +102,106 @@
 
     <script>
       // Общие настройки цветов
-      const colorPrimary = "#3498db";
-      const colorBackground = "#cbced5"; // Цвет пустой части графика (тень)
+    const colorPrimary = "#3498db";
+    const colorBackground = "#cbced5"; 
 
-      // 1. ЛИНЕЙНЫЙ ГРАФИК (BMI)
-      const ctxBmi = document.getElementById("bmiChart").getContext("2d");
-      new Chart(ctxBmi, {
-        type: "line",
-        data: {
-          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-          datasets: [
-            {
-              label: "BMI",
-              data: [23.5, 23.0, 22.8, 22.4, 22.5, 22.2],
-              borderColor: colorPrimary,
-              backgroundColor: "rgba(52, 152, 219, 0.1)", // Легкая заливка под графиком
-              borderWidth: 3,
-              tension: 0.4, // Плавность линий
-              pointBackgroundColor: "#dde1e7",
-              pointBorderColor: colorPrimary,
-              pointBorderWidth: 2,
-              pointRadius: 4,
-              fill: true,
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { display: false }, // Скрываем легенду
-            tooltip: {
-              backgroundColor: "#595959",
-              titleColor: "#fff",
-              bodyColor: "#fff",
-            },
-          },
-          scales: {
-            y: {
-              beginAtZero: false,
-              min: 20,
-              max: 25,
-              grid: {
-                color: "#e0e0e0",
-                borderDash: [5, 5],
-              },
-              ticks: { color: "#888" },
-            },
-            x: {
-              grid: { display: false },
-              ticks: { color: "#888" },
-            },
-          },
-        },
-      });
-
-      // ФУНКЦИЯ ДЛЯ СОЗДАНИЯ КРУГОВЫХ ДИАГРАММ
-      function createDoughnut(id, value, max) {
+    // ФУНКЦИЯ ДЛЯ СОЗДАНИЯ КРУГОВЫХ ДИАГРАММ
+    function createDoughnut(id, value, max) {
         const ctx = document.getElementById(id).getContext("2d");
         const remaining = max - value;
 
         new Chart(ctx, {
-          type: "doughnut",
-          data: {
-            labels: ["Done", "Left"],
-            datasets: [
-              {
-                data: [value, remaining],
-                backgroundColor: [colorPrimary, "transparent"], // Прозрачный для пустой части
-                borderColor: [colorPrimary, "#babecc"], // Цвет границ
-                borderWidth: [0, 2], // Граница только у пустой части для эффекта "канавки"
-                hoverBackgroundColor: [colorPrimary, "transparent"],
-                hoverBorderColor: [colorPrimary, "#babecc"],
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            cutout: "85%", // Толщина кольца (чем больше %, тем тоньше)
-            plugins: {
-              legend: { display: false },
-              tooltip: { enabled: false }, // Отключаем подсказки
+            type: "doughnut",
+            data: {
+                labels: ["Done", "Left"],
+                datasets: [
+                    {
+                        data: [value, remaining],
+                        backgroundColor: [colorPrimary, "transparent"], 
+                        borderColor: [colorPrimary, "#babecc"], 
+                        borderWidth: [0, 2], 
+                        hoverBackgroundColor: [colorPrimary, "transparent"],
+                        hoverBorderColor: [colorPrimary, "#babecc"],
+                    },
+                ],
             },
-            animation: {
-              animateScale: true,
-              animateRotate: true,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: "85%", 
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: false }, 
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true,
+                },
             },
-          },
         });
-      }
+    }
 
-      // Инициализация графиков целей
-      createDoughnut("caloriesChart", 1800, 2000);
-      createDoughnut("stepsChart", 8500, 10000);
-      createDoughnut("waterChart", 2.5, 3);
+    // 💥💥💥 ГЛАВНОЕ ИСПРАВЛЕНИЕ: Оборачиваем инициализацию в window.onload 💥💥💥
+    window.onload = function() {
+        
+        // 1. ЛИНЕЙНЫЙ ГРАФИК (BMI)
+        const ctxBmi = document.getElementById("bmiChart").getContext("2d");
+        new Chart(ctxBmi, {
+            type: "line",
+            data: {
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+                datasets: [
+                    {
+                        label: "BMI",
+                        data: [23.5, 23.0, 22.8, 22.4, 22.5, 22.2],
+                        borderColor: colorPrimary,
+                        backgroundColor: "rgba(52, 152, 219, 0.1)", 
+                        borderWidth: 3,
+                        tension: 0.4, 
+                        pointBackgroundColor: "#dde1e7",
+                        pointBorderColor: colorPrimary,
+                        pointBorderWidth: 2,
+                        pointRadius: 4,
+                        fill: true,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }, 
+                    tooltip: {
+                        backgroundColor: "#595959",
+                        titleColor: "#fff",
+                        bodyColor: "#fff",
+                    },
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 20,
+                        max: 25,
+                        grid: {
+                            color: "#e0e0e0",
+                            borderDash: [5, 5],
+                        },
+                        ticks: { color: "#888" },
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: "#888" },
+                    },
+                },
+            },
+        });
+
+        // 2. Инициализация графиков целей (круговые)
+        // Теперь они запускаются, когда размеры элементов точно известны!
+        createDoughnut("caloriesChart", 1800, 2000);
+        createDoughnut("stepsChart", 8500, 10000);
+        createDoughnut("waterChart", 2.5, 3);
+    };
     </script>
   </body>
 </html>
